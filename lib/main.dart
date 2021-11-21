@@ -30,14 +30,15 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(value: cart()),
         ChangeNotifierProxyProvider<Auth, products>(
             create: (_) => products(),
-            update: (ctx, authvalue, previviousproduct) =>
-            previviousproduct..getData(authvalue.token,
-                authvalue.userid,previviousproduct==null?null: previviousproduct.items)
-        ),
+            update: (ctx, authvalue, previviousproduct) => previviousproduct
+              ..getData(authvalue.token, authvalue.userid,
+                  previviousproduct == null ? null : previviousproduct.items)),
         ChangeNotifierProxyProvider<Auth, order>(
             create: (_) => order(),
-            update: (ctx, authvalue, previviousorder) => previviousorder..getData(authvalue.token,
-                authvalue.userid,previviousorder==null?null: previviousorder.orders)),      ],
+            update: (ctx, authvalue, previviousorder) => previviousorder
+              ..getData(authvalue.token, authvalue.userid,
+                  previviousorder == null ? null : previviousorder.orders)),
+      ],
       child: Consumer<Auth>(
         //استدعيت ال provider
         builder: (ctx, auth, _) => MaterialApp(
@@ -64,8 +65,11 @@ class MyApp extends StatelessWidget {
             orderScreen.routName: (_) => orderScreen(),
             userProductsScreen.routName: (_) => userProductsScreen(),
             splachScreen.routName: (_) => splachScreen(),
-            UserproductItem.routName: (_) => UserproductItem(),
-
+            UserproductItem.routName: (_) => UserproductItem(
+                  id: '',
+                  imageUrl: '',
+                  title: '',
+                ),
           },
         ),
       ),
